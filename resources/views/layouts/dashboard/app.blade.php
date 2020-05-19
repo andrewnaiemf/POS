@@ -1,4 +1,5 @@
 <!DOCTYPE html  style="height:1000px">
+<html {{ LaravelLocalization::getCurrentLocaleDirection() }}>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -95,16 +96,16 @@
         @include('layouts.dashboard._aside')
 
         @include('partials._session')
-        <header class="main-header">
+        <header class="main-header" style="z-index: 999">
 
             {{--<!-- Logo -->--}}
-            <a href="{{ route('dashboard.index') }}" class="logo">
+            <a href="{{ route('dashboard.index') }}" class="logo" >
                 {{--<!-- mini logo for sidebar mini 50x50 pixels -->--}}
-                <span class="logo-mini"><b>@lang('site.titlesm')</span>
-                <span class="logo-lg"><b>@lang('site.title')</span>
+                <span class="logo-mini">@lang('site.titlesm')</span>
+                <span class="logo-lg">Admin Panel</span>
             </a>
 
-            <nav class="navbar navbar-static-top">
+            <nav class="navbar navbar-static-top" >
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
@@ -180,16 +181,16 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    {{--<!-- inner menu: contains the actual data -->--}}
-                                    {{--                                <ul class="menu">--}}
-                                    {{--                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
-                                    {{--                                        <li>--}}
-                                    {{--                                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">--}}
-                                    {{--                                                {{ $properties['native'] }}--}}
-                                    {{--                                            </a>--}}
-                                    {{--                                        </li>--}}
-                                    {{--                                    @endforeach--}}
-                                    {{--                                </ul>--}}
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul>
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <li>
+                                                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                    {{ $properties['native'] }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -336,4 +337,5 @@
 </script>
 @stack('scripts')
 </body>
+</html>
 </html>
