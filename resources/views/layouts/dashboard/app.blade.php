@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@lang('site.title')</title>
+    <title>Dashboard</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -92,16 +92,15 @@
 
 <div class="wrapper"  style="background-color: gainsboro;" >
 
-    <div class="row">
+    <div>
         @include('layouts.dashboard._aside')
 
         @include('partials._session')
-        <header class="main-header" style="z-index: 999">
+        <header class="main-header">
 
             {{--<!-- Logo -->--}}
             <a href="{{ route('dashboard.index') }}" class="logo" >
                 {{--<!-- mini logo for sidebar mini 50x50 pixels -->--}}
-                <span class="logo-mini">@lang('site.titlesm')</span>
                 <span class="logo-lg">Admin Panel</span>
             </a>
 
@@ -116,91 +115,11 @@
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li><!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small>
-                                                        <i class="fa fa-clock-o"></i> 5 mins
-                                                    </small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">See All Messages</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        {{--<!-- Notifications: style can be found in dropdown.less -->--}}
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    {{--<!-- inner menu: contains the actual data -->--}}
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">View all</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        {{--<!-- Tasks: style can be found in dropdown.less -->--}}
-                        {{--                    @if(count(config('translatable.locales'))>1)--}}
-
-                        <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul>
-                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                            <li>
-                                                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                                    {{ $properties['native'] }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        {{--                    @endif--}}
-                        {{--<!-- User Account: style can be found in dropdown.less -->--}}
                         <li class="dropdown user user-menu">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                                {{--                            <span class="hidden-xs">{{ auth()->user()->name }}</span>--}}
+                                <span class="hidden-xs">{{ auth()->user()->first_name .' '.auth()->user()->last_name}}</span>
                             </a>
                             <ul class="dropdown-menu">
 
@@ -209,7 +128,7 @@
                                     <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                                     <p>
-                                        {{--                                    {{ auth()->user()->first_name }}}--}}
+                                        {{ auth()->user()->first_name .' '.auth()->user()->last_name}}
                                         <small>Member since 2 days</small>
                                     </p>
                                 </li>
@@ -219,7 +138,7 @@
 
 
                                     <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">@lang('site.logout')</a>
+                                                 document.getElementById('logout-form').submit();">logout</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -242,7 +161,7 @@
             <b>Version</b> 1.0.1
         </div>
         <!-- <strong>Copyright &copy; 2014-2016 -->
-            @lang('site.copyrights')</strong>
+          copyrights</strong>
         <!-- reserved. -->
     </footer>
 
@@ -282,11 +201,11 @@
 
         $('.sidebar-menu').tree();
 
-        //icheck
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            radioClass: 'iradio_minimal-blue'
-        });
+        // //icheck
+        // $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+        //     checkboxClass: 'icheckbox_minimal-blue',
+        //     radioClass: 'iradio_minimal-blue'
+        // });
 
         //delete
         $('.delete').click(function (e) {
@@ -296,15 +215,15 @@
             e.preventDefault();
 
             var n = new Noty({
-                text: "@lang('site.confirm_delete')",
+                text: "confirm delete",
                 type: "warning",
                 killer: true,
                 buttons: [
-                    Noty.button("@lang('site.yes')", 'btn btn-success mr-2', function () {
+                    Noty.button("yes", 'btn btn-success mr-2', function () {
                         that.closest('form').submit();
                     }),
 
-                    Noty.button("@lang('site.no')", 'btn btn-primary mr-2', function () {
+                    Noty.button("no", 'btn btn-primary mr-2', function () {
                         n.close();
                     })
                 ]
@@ -314,26 +233,10 @@
 
         });//end of delete
 
-        // // image preview
-        // $(".image").change(function () {
-        //
-        //     if (this.files && this.files[0]) {
-        //         var reader = new FileReader();
-        //
-        //         reader.onload = function (e) {
-        //             $('.image-preview').attr('src', e.target.result);
-        //         }
-        //
-        //         reader.readAsDataURL(this.files[0]);
-        //     }
-        //
-        // });
+        CKEDITOR.config.language =  "{{ app()->getLocale() }}";
 
-        {{--CKEDITOR.config.language =  "{{ app()->getLocale() }}";--}}
 
     });//end of ready
-
-
 </script>
 @stack('scripts')
 </body>

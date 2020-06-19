@@ -1,4 +1,4 @@
-<aside class="main-sidebar">
+<aside class="main-sidebar" >
 
     <section class="sidebar">
 
@@ -14,9 +14,18 @@
 
         <ul class="sidebar-menu" data-widget="tree">
             <li>
-                <a href="{{route('dashboard.index')}}"><i class="fa fa-th"></i><span>@lang('site.dashboard')</span></a>
+                <a href="{{route('dashboard.index')}}"><i class="fa fa-th"></i><span>Dashbord</span></a>
             </li>
-
+            @if(auth()->user()->hasPermission('read_customers'))
+                <li>
+                    <a href="{{route('dashboard.customers.index')}}"><i class="fa fa-th"></i><span>Customers</span></a>
+                </li>
+                @endif
+            @if(auth()->user()->hasPermission('read_services'))
+                <li>
+                    <a href="{{route('dashboard.services.index')}}"><i class="fa fa-th"></i><span>Services</span></a>
+                </li>
+            @endif
         </ul>
     </section>
 
